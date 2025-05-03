@@ -1,14 +1,7 @@
 import React, { useState } from 'react';
 import styles from './App.module.css';
-
-interface PatientInfo {
-  id: string;
-  name: string;
-  lastName: string;
-  age: number;
-  condition: string;
-  lastVisit: string;
-}
+import PatientDetails from './components/PatientDetails';
+import { PatientInfo } from './types';
 
 const patientsData: PatientInfo[] = [
   {
@@ -60,19 +53,10 @@ function App() {
       </div>
 
       {selectedPatient && (
-        <div className={styles.patientInfo}>
-          <h2>Patient Information</h2>
-          <p><strong>Name:</strong> {selectedPatient.name} {selectedPatient.lastName}</p>
-          <p><strong>Age:</strong> {selectedPatient.age}</p>
-          <p><strong>Condition:</strong> {selectedPatient.condition}</p>
-          <p><strong>Last Visit:</strong> {selectedPatient.lastVisit}</p>
-          <button 
-            className={styles.closeButton}
-            onClick={() => setSelectedPatient(null)}
-          >
-            Close
-          </button>
-        </div>
+        <PatientDetails
+          patient={selectedPatient}
+          onClose={() => setSelectedPatient(null)}
+        />
       )}
     </div>
   );
